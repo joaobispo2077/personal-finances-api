@@ -1,12 +1,8 @@
 <meta charset="utf-8">
 
 <h1 align="center">
- Clean Architecture API
+Personal finances API
 </h1>
-
-<div align="center">
-  <img  alt="Diagram Clean Architecture" title="#clean-architecture" src=".github/assets/clean-architecture-diagram.svg" width="600px" />
-</div>
 
 <p align="center">
  <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=2BA5A5&labelColor=1C1C1C" alt="PRs welcome!" />
@@ -28,8 +24,6 @@
 <p align="center">
   <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-challenges">Challenges</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#%EF%B8%8F-how-to-contribute">How to contribute</a>
 </p>
 
