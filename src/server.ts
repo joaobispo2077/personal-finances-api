@@ -1,13 +1,16 @@
+import 'dotenv/config'
 import fastify from 'fastify'
 import { knex } from './database'
+import { configs } from './configs'
+
+const { PORT } = configs
 
 const app = fastify()
 
-const PORT = Number(process.env.PORT) || 3333
-
 app.get('/tables', async () => {
-  const tables = await knex('sqlite_schema').select('*')
-  return tables
+  const transaction = await knex('transactions').select('*')
+
+  return transaction
 })
 
 app
