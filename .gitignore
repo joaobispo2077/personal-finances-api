@@ -1,6 +1,6 @@
 # Custom
 /tmp/*
-!/tmp/.gitkeep
+database.sqlite
 # Logs
 logs
 *.log
