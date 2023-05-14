@@ -10,6 +10,10 @@ const app = fastify()
 
 app.register(cookie)
 
+app.addHook('preHandler', async (request) => {
+  console.debug(`[${request.method}] ${request.url}`)
+})
+
 app.register(makeTransactionsRoutes, {
   prefix: 'transactions',
 })
