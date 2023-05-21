@@ -2,6 +2,7 @@
 .env.test
 /tmp/*
 database.sqlite
+test.sqlite
 # Logs
 logs
 *.log
