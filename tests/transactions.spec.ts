@@ -57,4 +57,39 @@ describe('Transactions routes', () => {
       ]),
     )
   })
+
+  it('should be able to get a specific transaction', async () => {
+    const responseCreated = await request(app.server)
+      .post('/transactions')
+      .send({
+        title: 'Gym membership',
+        amount: 100,
+        type: 'debit',
+      })
+
+    const cookies = responseCreated.get('Set-Cookie')
+
+    const responseGetList = await request(app.server)
+      .get('/transactions')
+      .set('Cookie', cookies)
+
+    const { transactions } = responseGetList.body
+
+    const response = await request(app.server)
+      .get(`/transactions/${transactions[0].id}`)
+      .set('Cookie', cookies)
+
+    const { transaction } = response.body
+
+    expect(response.statusCode).toBe(200)
+    expect(transaction).toEqual(
+      expect.objectContaining({
+        id: transactions[0].id,
+        created_at: expect.any(String),
+        session_id: expect.any(String),
+        title: 'Gym membership',
+        amount: -100,
+      }),
+    )
+  })
 })
