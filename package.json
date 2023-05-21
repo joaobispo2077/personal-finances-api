@@ -1,7 +1,7 @@
 {
   "name": "personal-finances-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "A personal finances API to help you manage your money",
   "main": "index.js",
   "scripts": {
     "start": "node dist/server.js",
