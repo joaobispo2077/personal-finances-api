@@ -92,4 +92,38 @@ describe('Transactions routes', () => {
       }),
     )
   })
+
+  it('should be able to get the summary', async () => {
+    const responseCreated = await request(app.server)
+      .post('/transactions')
+      .send({
+        title: 'PIX received - reward for be a GOAT',
+        amount: 7000,
+        type: 'credit',
+      })
+
+    const cookies = responseCreated.get('Set-Cookie')
+
+    await request(app.server)
+      .post('/transactions')
+      .set('Cookie', cookies)
+      .send({
+        title: 'Vivara Fiancée Diamond Ring 18K gold',
+        amount: 4500,
+        type: 'debit',
+      })
+
+    const response = await request(app.server)
+      .get(`/transactions/summary`)
+      .set('Cookie', cookies)
+
+    const { summary } = response.body
+
+    expect(response.statusCode).toBe(200)
+    expect(summary).toEqual(
+      expect.objectContaining({
+        amount: 2500,
+      }),
+    )
+  })
 })
