@@ -1,13 +1,21 @@
 import { knex as setupKnex, Knex } from 'knex'
 import { configs } from './configs'
 
-const { DATABASE_URL } = configs
+const { DATABASE_URL, DATABASE_CLIENT } = configs
+
+const createConnectionStrategy = () => {
+  if (DATABASE_CLIENT === 'sqlite') {
+    return {
+      filename: DATABASE_URL,
+    }
+  }
+
+  return DATABASE_URL
+}
 
 export const databaseConfig: Knex.Config = {
-  client: 'sqlite3',
-  connection: {
-    filename: DATABASE_URL,
-  },
+  client: DATABASE_CLIENT,
+  connection: createConnectionStrategy(),
   useNullAsDefault: true,
   migrations: {
     extension: 'ts',
