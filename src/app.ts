@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import fastify from 'fastify'
 import { makeTransactionsRoutes } from './routes/transactions'
 import cookie from '@fastify/cookie'
