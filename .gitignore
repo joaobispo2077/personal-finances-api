@@ -3,6 +3,7 @@
 /tmp/*
 database.sqlite
 test.sqlite
+build
 # Logs
 logs
 *.log
