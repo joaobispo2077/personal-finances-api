@@ -62,35 +62,58 @@ export async function makeTransactionsRoutes(app: FastifyInstance) {
     },
   )
 
-  app.post('/', async (request, response) => {
-    const createTransactionBodySchema = z.object({
-      title: z.string(),
-      amount: z.number(),
-      type: z.enum(['credit', 'debit']),
-    })
-
-    const { title, amount, type } = createTransactionBodySchema.parse(
-      request.body,
-    )
-
-    let sessionId = request.cookies.sessionId
-
-    if (!sessionId) {
-      sessionId = randomUUID()
-
-      response.cookie('sessionId', sessionId, {
-        path: '/',
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+  app.post(
+    '/',
+    {
+      schema: {
+        tags: ['Transactions'],
+        body: {
+          type: 'object',
+          properties: {
+            title: { type: 'string' },
+            amount: { type: 'number' },
+            type: { type: 'string', enum: ['credit', 'debit'] },
+          },
+          required: ['title', 'amount', 'type'],
+        },
+        response: {
+          201: {
+            type: 'object',
+            properties: {},
+          },
+        },
+      },
+    },
+    async (request, response) => {
+      const createTransactionBodySchema = z.object({
+        title: z.string(),
+        amount: z.number(),
+        type: z.enum(['credit', 'debit']),
       })
-    }
 
-    await knex('transactions').insert({
-      id: randomUUID(),
-      title,
-      amount: type === 'credit' ? amount : amount * -1,
-      session_id: sessionId,
-    })
+      const { title, amount, type } = createTransactionBodySchema.parse(
+        request.body,
+      )
 
-    return response.status(201).send()
-  })
+      let sessionId = request.cookies.sessionId
+
+      if (!sessionId) {
+        sessionId = randomUUID()
+
+        response.cookie('sessionId', sessionId, {
+          path: '/',
+          maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+        })
+      }
+
+      await knex('transactions').insert({
+        id: randomUUID(),
+        title,
+        amount: type === 'credit' ? amount : amount * -1,
+        session_id: sessionId,
+      })
+
+      return response.status(201).send()
+    },
+  )
 }
