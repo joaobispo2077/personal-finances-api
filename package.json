@@ -4,8 +4,8 @@
   "description": "A personal finances API to help you manage your money",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "build": "tsup src",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build",
     "dev": "tsx watch src/server.ts",
     "lint": "eslint src --ext .ts --fix",
     "knex": "node --no-warnings --loader tsx ./node_modules/knex/bin/cli.js --knexfile ./knexfile.ts",
