@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node build/server.js",
-    "postbuild": "run-s migration:run",
+    "prebuild": "run-s migration:run build:clean",
     "build": "tsup src --out-dir build",
     "build:clean": "rimraf build",
     "dev": "tsx watch src/server.ts",
