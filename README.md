@@ -31,7 +31,7 @@ Personal finances API
 
 ## 💻 Project
 
-This project is an API for a squeze page to register users on a mailing list and to email them a bonus. It was written in Node.js and TypeScript following the Clean Architecture principles.
+Manage your assets easily.
 
 ## 🚀 Technologies
 
